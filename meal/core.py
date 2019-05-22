@@ -17,21 +17,6 @@ from OderMeal.settings import APPID, AppSECRET
 import pymysql
 
 
-def task():
-    db = DataBaseHandle("127.0.0.1", "root", "mysql", "myproject", 3306)
-    date = db.select_all('select * from reserve where TO_DAYS(`create`)=TO_DAYS(NOW()) AND `status`=1')
-    res = list(date)
-    if len(res) > 0:
-        data = db.send_template(res)
-        if data['errcode'] == 41029 and data['errcode'] == 41028:
-            task()
-        elif data['errcode'] == 1:
-            print('formId is None')
-
-        else:
-            print('success send')
-
-
 class DataBaseHandle(object):
     def __init__(self, host, user, pwd, db, port):
         self.host = host
@@ -145,3 +130,22 @@ class DataBaseHandle(object):
             return 1
         elif t2 < now <= t3:
             return 2
+
+
+def task():
+    db = DataBaseHandle("127.0.0.1", "root", "mysql", "myproject", 3306)
+    date = db.select_all('select * from reserve where TO_DAYS(`create`)=TO_DAYS(NOW()) AND `status`=1')
+    res = list(date)
+    if len(res) > 0:
+        data = db.send_template(res)
+        if data['errcode'] == 41029 and data['errcode'] == 41028:
+            task()
+        elif data['errcode'] == 1:
+            print('formId is None')
+
+        else:
+            print('success send')
+
+
+def test():
+    print('crotab  is  success!')
