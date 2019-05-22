@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'OderMeal.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'myproject',
+        'NAME': 'project',
         'USER': 'root',
         'PASSWORD': 'mysql',
         'HOST': '127.0.0.1',
@@ -130,7 +130,7 @@ APPID = "wxf49edacad8eb4029"
 AppSECRET = "b8b72122f2a2b85ff7acc4c6a9251326"
 # APPEND_SLASH = False
 CRONJOBS = [
-    ('*/5 * * * *', 'meal.core.task')
+    ('*/1 * * * *', 'meal.core.task','>> /home/crontab.log')
 ]
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
