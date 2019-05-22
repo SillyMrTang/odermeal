@@ -145,7 +145,5 @@ def task():
 
         else:
             print('success send')
-
-
-def test():
-    print('crotab  is  success!')
+    else:
+        print('暂无')
