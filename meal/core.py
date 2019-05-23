@@ -132,7 +132,7 @@ class DataBaseHandle(object):
             return 2
 
 
-def task():
+def test():
     db = DataBaseHandle("127.0.0.1", "root", "mysql", "myproject", 3306)
     date = db.select_all('select * from reserve where TO_DAYS(`create`)=TO_DAYS(NOW()) AND `status`=1')
     res = list(date)
@@ -146,4 +146,5 @@ def task():
         else:
             print('success send')
     else:
-        print('暂无')
+        now = datetime.datetime.now().strftime("%H:%M")
+        print('暂无----', now)

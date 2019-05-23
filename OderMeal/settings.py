@@ -24,7 +24,7 @@ SECRET_KEY = 'b_@liq5fi5lr*8du9r=22wmn+ll!2la**gknayy+rehyu4)mwj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [*]
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -123,14 +123,14 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 APPID = "wxf49edacad8eb4029"
 AppSECRET = "b8b72122f2a2b85ff7acc4c6a9251326"
 # APPEND_SLASH = False
 CRONJOBS = [
-    ('*/1 * * * *', 'meal.core.test', '>> /home/crontab.log'),
+   # ('*/1 * * * *', 'meal.core.test', '>> /home/crontab.log'),
     ('30 7 * * *', 'meal.core.test', '>> /home/crontab.log'),
     ('15 11 * * *', 'meal.core.test', '>> /home/crontab.log'),
     ('15 17 * * *', 'meal.core.test', '>> /home/crontab.log')

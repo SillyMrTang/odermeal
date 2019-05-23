@@ -19,7 +19,7 @@ from . import settings
 import xadmin
 
 urlpatterns = [
-    url(r'^xadmin/', xadmin.site.urls),
+    url(r'^dishes/xadmin/', xadmin.site.urls),
     url(r'', include('meal.urls')),
     url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 ]
