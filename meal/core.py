@@ -13,7 +13,6 @@
 import datetime
 import requests
 import json
-from OderMeal.settings import APPID, AppSECRET
 import pymysql
 
 
@@ -107,12 +106,13 @@ class DataBaseHandle(object):
         self.close()
         return {"errcode": 1}
 
-    def get_token(self):
+    def get_token(self):	
+        print('get token ing')
         url = 'https://api.weixin.qq.com/cgi-bin/token'
         params = {
             'grant_type': 'client_credential',
-            'appid': APPID,
-            'secret': AppSECRET
+            'appid': 'wxf49edacad8eb4029',
+            'secret': 'b8b72122f2a2b85ff7acc4c6a9251326'
         }
         res = requests.get(url, params=params)
         return res.json()['access_token']
@@ -130,16 +130,16 @@ class DataBaseHandle(object):
             return 1
         elif t2 < now <= t3:
             return 2
-
-
-def test():
-    db = DataBaseHandle("127.0.0.1", "root", "mysql", "myproject", 3306)
+        else:
+            return 2
+def task():
+    db = DataBaseHandle("127.0.0.1", "root", "mysql", "project", 3306)
     date = db.select_all('select * from reserve where TO_DAYS(`create`)=TO_DAYS(NOW()) AND `status`=1')
     res = list(date)
     if len(res) > 0:
         data = db.send_template(res)
         if data['errcode'] == 41029 and data['errcode'] == 41028:
-            test()
+            task()
         elif data['errcode'] == 1:
             print('formId is None')
 
@@ -148,3 +148,5 @@ def test():
     else:
         now = datetime.datetime.now().strftime("%H:%M")
         print('暂无----', now)
+
+
