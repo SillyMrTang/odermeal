@@ -21,6 +21,6 @@ router.register(r'types',  views.DishesTypeViewSet, base_name='types')
 urlpatterns = [
     url(r'openid/', views.GetOpenid.as_view()),
     url(r'users/', views.Users.as_view()),
-    url(r'form/', views.Form.as_view()),
+    url(r'forms/', views.Form.as_view()),
     url(r'^api/', include(router.urls)),
 ]
