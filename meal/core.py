@@ -139,7 +139,7 @@ def test():
     if len(res) > 0:
         data = db.send_template(res)
         if data['errcode'] == 41029 and data['errcode'] == 41028:
-            task()
+            test()
         elif data['errcode'] == 1:
             print('formId is None')
 
