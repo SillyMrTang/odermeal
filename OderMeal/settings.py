@@ -52,6 +52,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'meal.login_middleware.RequireLoginMiddleware'
+
 ]
 
 ROOT_URLCONF = 'OderMeal.urls'
