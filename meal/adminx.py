@@ -11,12 +11,18 @@
 -------------------------------------------------
 """
 from xadmin import views
-from .models import DishesType, Banner, RemindTime, TemplateReceiver
+from .models import DishesType, Banner, RemindTime, TemplateReceiver, UserInfo
 import xadmin
 
 
 class DishesAdmin(object):
     list_display = ['id', 'name', 'image']
+    search_fields = ['name', ]
+    ordering = ('id',)
+
+
+class UserAdmin(object):
+    list_display = ['id', 'name', 'openid']
     search_fields = ['name', ]
     ordering = ('id',)
 
@@ -56,3 +62,4 @@ xadmin.site.register(DishesType, DishesAdmin)
 xadmin.site.register(Banner, BannerAdmin)
 xadmin.site.register(TemplateReceiver, TemplateAdmin)
 xadmin.site.register(RemindTime, TimeAdmin)
+xadmin.site.register(UserInfo, UserAdmin)
