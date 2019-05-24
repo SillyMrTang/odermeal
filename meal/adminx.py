@@ -11,7 +11,7 @@
 -------------------------------------------------
 """
 from xadmin import views
-from .models import DishesType, Banner
+from .models import DishesType, Banner, RemindTime, TemplateReceiver
 import xadmin
 
 
@@ -23,6 +23,18 @@ class DishesAdmin(object):
 
 class BannerAdmin(object):
     list_display = ['id', 'image']
+    search_fields = ['id', ]
+    ordering = ('id',)
+
+
+class TemplateAdmin(object):
+    list_display = ['id', 'user']
+    search_fields = ['user', ]
+    ordering = ('id',)
+
+
+class TimeAdmin(object):
+    list_display = ['id', 'breakfast_time', 'lunch_time', 'dinner_time']
     search_fields = ['id', ]
     ordering = ('id',)
 
@@ -42,3 +54,5 @@ xadmin.site.register(views.CommAdminView, GlobalSettings)
 xadmin.site.register(views.BaseAdminView, BaseSetting)
 xadmin.site.register(DishesType, DishesAdmin)
 xadmin.site.register(Banner, BannerAdmin)
+xadmin.site.register(TemplateReceiver, TemplateAdmin)
+xadmin.site.register(RemindTime, TimeAdmin)
