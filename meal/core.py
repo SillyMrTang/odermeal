@@ -76,15 +76,16 @@ class DataBaseHandle(object):
             num += int(i['num'])
 
         token = self.get_token()
-
         form = self.select('''SELECT * FROM form''')
-        print(form)
+        receiver = self.select('''SELECT * FROM template''')
+        pk = receiver['user_id']
+        user = self.select('SELECT * FROM user where id={}'.format(pk))
         if form is not None:
             formid = form['forId']
             self.delete('delete from form where id ={}'.format(form['id']))
             url = 'https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send?access_token=' + token
             data = {
-                'touser': 'orunE5FGoSzrBkAT2_hIjOeN82pc',
+                'touser': user['openid'],
                 'template_id': 'Ll1RZPUI6VaGyCOwjyh0y-VtwGsVmFx7-b4HUhX_PWY',
                 'form_id': formid,
                 'data': {
