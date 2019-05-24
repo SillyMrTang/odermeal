@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'meal.login_middleware.RequireLoginMiddleware'
 ]
 
 ROOT_URLCONF = 'OderMeal.urls'
@@ -130,7 +131,6 @@ APPID = "wxf49edacad8eb4029"
 AppSECRET = "b8b72122f2a2b85ff7acc4c6a9251326"
 # APPEND_SLASH = False
 CRONJOBS = [
-   # ('*/1 * * * *', 'meal.core.task', '>> /home/crontab.log'),
     ('30 7 * * *', 'meal.core.task', '>> /home/crontab.log'),
     ('15 11 * * *', 'meal.core.task', '>> /home/crontab.log'),
     ('15 17 * * *', 'meal.core.task', '>> /home/crontab.log')
@@ -138,3 +138,12 @@ CRONJOBS = [
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
 }
+
+# login配置
+LOGIN_REQUIRED_API_URLS = (r'/api(.*)$',)
+LOGIN_REQUIRED_API_EXCEPTIONS = (
+    r'/api/reserves',
+    r'/api/banners',
+    r'/api/dishes',
+    r'/api/types',
+)
