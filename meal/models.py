@@ -67,3 +67,25 @@ class FormId(models.Model):
     class Meta:
         verbose_name_plural = 'formID表'
         db_table = 'form'
+
+
+class TemplateReceiver(models.Model):
+    user = models.OneToOneField(UserInfo, on_delete=models.CASCADE, related_name='template', verbose_name='消息接收人')
+    create = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = '模板消息接收者'
+        db_table = 'template'
+
+    def __str__(self):
+        return self.user.name
+
+
+class RemindTime(models.Model):
+    breakfast_time = models.CharField(max_length=100, verbose_name='早餐时间')
+    lunch_time = models.CharField(max_length=100, verbose_name='午餐时间')
+    dinner_time = models.CharField(max_length=100, verbose_name='晚餐时间')
+
+    class Meta:
+        verbose_name_plural = '提醒时间'
+        db_table = 'remind_time'
