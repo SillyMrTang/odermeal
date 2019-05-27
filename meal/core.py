@@ -80,6 +80,7 @@ class DataBaseHandle(object):
         receiver = self.select('''SELECT * FROM template''')
         pk = receiver['user_id']
         user = self.select('SELECT * FROM user where id={}'.format(pk))
+        print(user['openid'])
         if form is not None:
             formid = form['forId']
             self.delete('delete from form where id ={}'.format(form['id']))
@@ -102,6 +103,7 @@ class DataBaseHandle(object):
 
             }
             res = requests.post(url, json.dumps(data))
+            print(res)
             return res.json()
 
         self.close()
@@ -120,9 +122,9 @@ class DataBaseHandle(object):
 
     def compare(self):
         import datetime
-        t1 = '07:45'
-        t2 = '11:15'
-        t3 = '17:15'
+        t1 = '06:00'
+        t2 = '10:20'
+        t3 = '15:45'
         now = datetime.datetime.now().strftime("%H:%M")
         print("当前时间:" + now)
         if now <= t1:
