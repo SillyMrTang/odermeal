@@ -20,6 +20,7 @@ class GetOpenid(View):
     """
     获取openid返回
     """
+
     def get(self, request):
         code = request.GET.get('code')
         params = {
@@ -47,6 +48,7 @@ class Users(View):
     """
     根据openid对user信息进行存储
     """
+
     def get(self, request):
         openid = request.GET.get('openid')
         data = serialize('json', UserInfo.objects.filter(openid=openid))
@@ -90,6 +92,7 @@ class Form(View):
     """
     formId 的保存
     """
+
     def post(self, request):
         data = json.loads(request.body)
         form_id = data['form']
@@ -113,6 +116,8 @@ class DishesTypeViewSet(viewsets.ModelViewSet):
     """
     queryset = DishesType.objects.all()
     serializer_class = DishesTypeSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('types',)
 
 
 class DishesListViewSet(viewsets.ModelViewSet):

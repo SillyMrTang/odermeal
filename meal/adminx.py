@@ -16,7 +16,7 @@ import xadmin
 
 
 class DishesAdmin(object):
-    list_display = ['id', 'name', 'image']
+    list_display = ['id', 'name', 'image', 'types']
     search_fields = ['name', ]
     ordering = ('id',)
 

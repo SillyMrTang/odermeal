@@ -37,8 +37,17 @@ class Banner(models.Model):
 
 
 class DishesType(models.Model):
+    DISH_CHOICES = (
+        (0, '健康早点'),
+        (1, '时令小炒'),
+        (2, '养生煲汤'),
+        (3, '家庭小炒'),
+        (4, '百搭配菜'),
+        (5, '经典硬菜'),
+    )
+    types = models.IntegerField(choices=DISH_CHOICES, default=0)
     name = models.CharField(max_length=32)
-    image = models.ImageField(upload_to='type/')
+    image = models.ImageField(upload_to='type/', null=True, blank=True)
 
     class Meta:
         verbose_name_plural = '菜单信息'
