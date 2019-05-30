@@ -21,7 +21,7 @@ class ReserveStatus(models.Model):
     num = models.CharField(max_length=32)
     status = models.IntegerField(choices=((0, '未预定'), (1, ' 已预订')), default=0)
     user = models.ForeignKey(UserInfo, on_delete=models.CASCADE, related_name='status')
-    create = models.DateField(auto_now=True)
+    create = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         verbose_name_plural = '预订信息'
