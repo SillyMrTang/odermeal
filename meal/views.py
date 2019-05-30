@@ -75,16 +75,8 @@ class ReserveViewSet(viewsets.ModelViewSet):
     """
     queryset = ReserveStatus.objects.all()
     serializer_class = ReserveSerializer
-
-    def get_queryset(self):
-        status = self.request.query_params.get('status', None)
-        user = self.request.query_params.get('user', None)
-        if status and user:
-            now = datetime.time(18, 00, 00)
-            print(ReserveStatus.objects.filter(create__hours__gt=now).filter(status=status).filter(user=user))
-            return ReserveStatus.objects.filter(create__hours__gt=now).filter(status=status).filter(user=user)
-
-        return ReserveStatus.objects.all()
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('user', 'status')
 
     def create(self, request, *args, **kwargs):
         user_id = request.data['user']

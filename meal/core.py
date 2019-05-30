@@ -51,6 +51,20 @@ class DataBaseHandle(object):
         finally:
             self.cursor.close()
 
+    def update(self, sql):
+        self.cursor = self.db.cursor(cursor=pymysql.cursors.DictCursor)
+        try:
+            self.cursor.execute(sql)
+            self.db.commit()
+            print('修改成功')
+            self.close()
+        except Exception as e:
+            print('回滚', e)
+            # 发生错误时回滚
+            self.db.rollback()
+        finally:
+            self.cursor.close()
+
     def delete(self, sql):
         self.cursor = self.db.cursor(cursor=pymysql.cursors.DictCursor)
         try:
@@ -126,7 +140,8 @@ class DataBaseHandle(object):
         t2 = '10:20'
         t3 = '15:45'
         now = datetime.datetime.now().strftime("%H:%M")
-        print("当前时间:" + now)
+        date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+        print("当前时间:" + date)
         if now <= t1:
             return 0
         elif t1 < now <= t2:
@@ -139,7 +154,7 @@ class DataBaseHandle(object):
 
 def task():
     db = DataBaseHandle("127.0.0.1", "root", "mysql", "project", 3306)
-    date = db.select_all('select * from reserve where TO_DAYS(`create`)=TO_DAYS(NOW()) AND `status`=1')
+    date = db.select_all('select * from reserve where status=1')
     res = list(date)
     if len(res) > 0:
         data = db.send_template(res)
@@ -153,3 +168,10 @@ def task():
     else:
         now = datetime.datetime.now().strftime("%H:%M")
         print('暂无----', now)
+
+
+def task_two():
+    date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
+    print("当前时间:" + date)
+    db = DataBaseHandle("127.0.0.1", "root", "mysql", "project", 3306)
+    db.update('update reserve set status=0 where status=1')

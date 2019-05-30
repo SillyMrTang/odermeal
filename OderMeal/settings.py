@@ -134,7 +134,8 @@ AppSECRET = "b8b72122f2a2b85ff7acc4c6a9251326"
 CRONJOBS = [
     ('05 6 * * *', 'meal.core.task', '>> /home/crontab.log'),
     ('20 10 * * *', 'meal.core.task', '>> /home/crontab.log'),
-    ('45 15 * * *', 'meal.core.task', '>> /home/crontab.log')
+    ('45 15 * * *', 'meal.core.task', '>> /home/crontab.log'),
+    ('55 17 * * *', 'meal.core.task_two', '>> /home/crontab.log')
 ]
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
