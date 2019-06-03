@@ -117,7 +117,7 @@ class DataBaseHandle(object):
 
             }
             res = requests.post(url, json.dumps(data))
-            print(res)
+            print(res.json())
             return res.json()
 
         self.close()
@@ -137,8 +137,8 @@ class DataBaseHandle(object):
     def compare(self):
         import datetime
         t1 = '06:00'
-        t2 = '10:20'
-        t3 = '15:45'
+        t2 = '10:30'
+        t3 = '16:00'
         now = datetime.datetime.now().strftime("%H:%M")
         date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
         print("当前时间:" + date)
@@ -158,7 +158,7 @@ def task():
     res = list(date)
     if len(res) > 0:
         data = db.send_template(res)
-        if data['errcode'] == 41029 and data['errcode'] == 41028:
+        if data['errcode'] == 41029 or data['errcode']== 41028:
             task()
         elif data['errcode'] == 1:
             print('formId is None')
@@ -172,6 +172,8 @@ def task():
 
 def task_two():
     date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-    print("当前时间:" + date)
+    print("修改状态 当前时间:" + date)
     db = DataBaseHandle("127.0.0.1", "root", "mysql", "project", 3306)
     db.update('update reserve set status=0 where status=1')
+
+

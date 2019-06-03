@@ -27,6 +27,9 @@ class ReserveStatus(models.Model):
         verbose_name_plural = '预订信息'
         db_table = 'reserve'
 
+    def __str__(self):
+        return self.user.name if self.user.name else ''
+
 
 class Banner(models.Model):
     image = models.ImageField(upload_to='banner/')

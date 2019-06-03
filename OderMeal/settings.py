@@ -133,11 +133,11 @@ AppSECRET = "b8b72122f2a2b85ff7acc4c6a9251326"
 # APPEND_SLASH = False
 CRONJOBS = [
     ('0 6 * * *', 'meal.core.task', '>> /home/crontab.log'),
-    ('0 10 * * *', 'meal.core.task', '>> /home/crontab.log'),
-    ('45 15 * * *', 'meal.core.task', '>> /home/crontab.log'),
+    ('30 10 * * *', 'meal.core.task', '>> /home/crontab.log'),
+    ('0 16 * * *', 'meal.core.task', '>> /home/crontab.log'),
     ('0 18 * * *', 'meal.core.task_two', '>> /home/crontab.log'),
     ('0 8 * * *', 'meal.core.task_two', '>> /home/crontab.log'),
-    ('0 12 * * *', 'meal.core.task_two', '>> /homs/crontab.log')
+    ('0 12 * * *', 'meal.core.task_two', '>> /home/crontab.log')
 ]
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',)
